@@ -4,6 +4,7 @@
   "description": "telegram bot with a graph brain",
   "main": "index.js",
   "scripts": {
+		"build": "npx tsc .",
     "test": "test"
   },
   "repository": {

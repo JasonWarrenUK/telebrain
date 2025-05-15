@@ -1,13 +1,15 @@
-import TelegramBot, { Message } from "node-telegram-bot-api";
+// import TelegramBot, { Message } from "node-telegram-bot-api";
+import TelegramBot from "node-telegram-bot-api";
+import dotenv from "dotenv";
 
-require('dotenv').config();
+dotenv.config();
 
 console.log(process.env);
 const token = process.env.TELEGRAM_KEY || "";
 
 const bot = new TelegramBot(token, {polling: true});
 
-bot.onText(/\/echo (.+)/, (msg:Message, match) => {
+bot.onText(/\/echo (.+)/, (msg/* :Message */, match) => {
   const chatId = msg.chat.id;
 	
 	const resp = match ? match[1] : "NOTHIN'";
@@ -15,7 +17,7 @@ bot.onText(/\/echo (.+)/, (msg:Message, match) => {
   bot.sendMessage(chatId, resp);
 });
 
-bot.on('message', (msg:Message) => {
+bot.on('message', (msg/* :Message */) => {
   const chatId = msg.chat.id;
 
   bot.sendMessage(chatId, 'uh... k');

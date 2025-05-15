@@ -1,0 +1,26 @@
+{
+  "name": "telebrain",
+  "version": "0.0.1",
+  "description": "telegram bot with a graph brain",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JasonWarrenUK/telebrain.git"
+  },
+  "author": "Jason Warren",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JasonWarrenUK/telebrain/issues"
+  },
+  "homepage": "https://github.com/JasonWarrenUK/telebrain#readme",
+  "dependencies": {
+    "node-telegram-bot-api": "^0.66.0"
+  },
+  "devDependencies": {
+    "@types/node-telegram-bot-api": "^0.64.8",
+    "typescript": "^5.8.3"
+  }
+}

@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/JasonWarrenUK/telebrain#readme",
   "dependencies": {
+    "dotenv": "^16.5.0",
     "node-telegram-bot-api": "^0.66.0"
   },
   "devDependencies": {

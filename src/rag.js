@@ -29,9 +29,7 @@ try {
   }
 }
 
-console.log(`...${collection.name.split("-").join(" ")}!`);
-console.log(`Today, we have...`);
-console.log(await collection.count());
+console.log(`Welcome to ${collection.name.split("-").join(" ")}!`);
 
 await collection.add({
 	documents: [
@@ -39,22 +37,43 @@ await collection.add({
 		"I have a linen vest",
 		"I have a cotton vest",
 		"I have a rubber vest",
+		"I have a vest with sleeves (aka a shirt)",
+		"I have a vest for your legs (aka shorts)"
 	],
-	ids: ["vestString", "vestLinen", "vestCotton", "vestRubber"],
+	ids: [
+		"vestString",
+		"vestLinen",
+		"vestCotton",
+		"vestRubber",
+		"shirt",
+		"shorts"
+	],
 });
 
-console.log(await collection.count());
-console.log(`...lovely vests`);
+console.log(`Today, we have ${await collection.count()} lovely vests`);
 
-console.log(`Today's query is...`);
-const queries = {
-	bdsm: "I'm well into BDSM"
-}
-console.log(`"${queries.bdsm}"`);
+const queries = [
+	"I'm well into BDSM",
+	"I have sensitive skin",
+	"I am entirely made of legs",
+	"I am obsessed with string",
+	"Most vests are too heavy",
+	"I am repulsed by the sight of bare arms"
+]
+
+function randomQuery() {
+	const max = queries.length;
+	const random = Math.floor(Math.random() * max);
+	return queries[random];
+};
+
+const query = randomQuery();
+
+console.log(`"Today's query is... ${query}"`);
 
 const results = await collection.query({
-    queryTexts: queries.bdsm,
-    nResults: 4
+	queryTexts: query,
+	nResults: 1
 });
 
-console.log(results);
+console.log(`Luckily for you... ${results.documents[0]}`);

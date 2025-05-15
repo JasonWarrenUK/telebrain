@@ -1,5 +1,6 @@
 import TelegramBot /*, { Message } */ from "node-telegram-bot-api";
 import dotenv from "dotenv";
+import { getVest } from "./rag.js";
 
 dotenv.config();
 const token = process.env.TELEGRAM;
@@ -12,7 +13,8 @@ if (!token) {
 const bot = new TelegramBot(token, {polling: true});
 bot.setMyCommands([
   { command: "start", description: "Starts the bot" },
-	{ command: "code", description: "Show the repo" }
+	{ command: "code", description: "Show the repo" },
+	{ command: "vest", description: "Get a vest recommendation" }
 ]);
 
 bot.onText(/\/start/, (msg) => {
@@ -38,6 +40,16 @@ bot.onText(/\/code/, (msg) => {
 
   bot.sendMessage(chatId, resp);
 });
+
+bot.onText(/\/vest/, async (msg) => {
+	const chatId = msg.chat.id;
+	const user = msg.from.first_name;
+	bot.sendMessage(chatId, `${user}, you weird fuck, I hear you. Let me think.`);
+
+	const resp = await getVest(msg.text);
+
+  bot.sendMessage(chatId, `For you... ${resp}`);
+})
 
 bot.on("message", (msg) => {
   const text = msg.text || "";

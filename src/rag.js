@@ -1,3 +1,4 @@
+console.log("importing rag.js");
 import { ChromaClient } from "chromadb";
 import dotenv from "dotenv";
 import { OpenAIEmbeddingFunction } from 'chromadb';
@@ -28,6 +29,8 @@ try {
     throw error;
   }
 }
+
+console.log("Collection loaded");
 
 await collection.add({
 	documents: [
@@ -84,6 +87,8 @@ await collection.add({
 	],
 });
 
+console.log(await collection.count(), "entries");
+
 export const queryList = [
 	"I'm well into BDSM",
 	"I have sensitive skin",
@@ -129,3 +134,5 @@ export async function getVest(input) {
 
 	return results.documents[0];
 }
+
+console.log("rag.js loaded");

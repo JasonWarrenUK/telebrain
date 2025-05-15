@@ -14,7 +14,7 @@ const bot = new TelegramBot(token, {polling: true});
 bot.setMyCommands([
   { command: "start", description: "Starts the bot" },
 	{ command: "code", description: "Show the repo" },
-	{ command: "vest", description: "Get a vest recommendation" }
+	{ command: "vest", description: "Get a vest recommendation. Type your requirements after the command." }
 ]);
 
 bot.onText(/\/start/, (msg) => {
@@ -23,8 +23,8 @@ bot.onText(/\/start/, (msg) => {
   bot.sendMessage(msg.chat.id, `Oh fuck. ${user}. It's you.`, {
 		"reply_markup": {
 			"keyboard": [
-				["Hi", "Hello"],
-				["/code"],
+				["Hi", "/code"],
+				["/vest"],
 				// ["I'm robot"]
 			]
 		}

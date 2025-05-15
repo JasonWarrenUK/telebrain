@@ -11,7 +11,6 @@ if (!token) {
 }
 
 const bot = new TelegramBot(token, {polling: true});
-
 bot.setMyCommands([
   { command: "start", description: "Starts the bot" },
 	{ command: "code", description: "Show the repo" }
@@ -20,10 +19,18 @@ bot.setMyCommands([
 bot.onText(/\/start/, (msg) => {
 	const user = msg.from.first_name;
 
-  bot.sendMessage(msg.chat.id, `Oh fuck. ${user}. It's you.`);
+  bot.sendMessage(msg.chat.id, `Oh fuck. ${user}. It's you.`, {
+		"reply_markup": {
+			"keyboard": [
+				// ["Sample text", "Second sample"],
+				["/code"],
+				// ["I'm robot"]
+			]
+		}
+	});
 });
 
-bot.onText(/\/code/, (msg, match) => {
+bot.onText(/\/code/, (msg) => {
 	const chatId = msg.chat.id;
 	const user = msg.from.first_name;
 	const repo = "https://github.com/JasonWarrenUK/telebrain";
@@ -46,7 +53,7 @@ bot.on("message", (msg) => {
 
 process.on("SIGINT", () => {
   console.log("BORED. Bye.");
-	
+
   bot.stopPolling()
 		.then(() => process.exit(0));
 });

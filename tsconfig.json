@@ -48,7 +48,7 @@
 
     /* JavaScript Support */
     "allowJs": true,
-    "checkJs": true,
+    "checkJs": false,
     // "maxNodeModuleJsDepth": 1,                        /* Specify the maximum folder depth used for checking JavaScript files from 'node_modules'. Only applicable with 'allowJs'. */
 
     /* Emit */

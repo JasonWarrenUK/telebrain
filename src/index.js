@@ -1,13 +1,12 @@
-// import TelegramBot, { Message } from "node-telegram-bot-api";
-import TelegramBot from "node-telegram-bot-api";
+import TelegramBot /*, { Message } */ from "node-telegram-bot-api";
 import dotenv from "dotenv";
 
 dotenv.config();
-console.log(process.env);
-
-const token = process.env.TELEGRAM_KEY;
+const token = process.env.TELEGRAM;
 if (!token) {
 	throw new Error("TELEGRAM_KEY is not set in the .env file");
+} else {
+	console.log("Telegram token loaded");
 }
 
 const bot = new TelegramBot(token, {polling: true});
@@ -22,7 +21,7 @@ bot.onText(/\/start/, (msg) => {
   bot.sendMessage(msg.chat.id, `Oh fuck. ${user}. It's you.`, {
 		"reply_markup": {
 			"keyboard": [
-				// ["Sample text", "Second sample"],
+				["Hi", "Hello"],
 				["/code"],
 				// ["I'm robot"]
 			]

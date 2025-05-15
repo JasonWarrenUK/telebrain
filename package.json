@@ -2,10 +2,12 @@
   "name": "telebrain",
   "version": "0.0.1",
   "description": "telegram bot with a graph brain",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-		"build": "npx tsc .",
-		"dev": "node src/index.js",
+    "build": "npx tsc .",
+    "dev": "node src/index.js",
+		"rag": "node src/rag.js",
     "test": "test"
   },
   "repository": {
@@ -19,8 +21,11 @@
   },
   "homepage": "https://github.com/JasonWarrenUK/telebrain#readme",
   "dependencies": {
+    "chromadb": "^2.4.4",
+    "chromadb-default-embed": "^2.14.0",
     "dotenv": "^16.5.0",
-    "node-telegram-bot-api": "^0.66.0"
+    "node-telegram-bot-api": "^0.66.0",
+    "request": "^2.88.2"
   },
   "devDependencies": {
     "@types/node-telegram-bot-api": "^0.64.8",

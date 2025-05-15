@@ -1,0 +1,16 @@
+{
+	"message_id":15,
+	"from":{
+		"id":7068960341,
+		"is_bot":false,
+		"first_name":"Jason",
+		"language_code":"en"
+	},
+	"chat":{
+		"id":7068960341,
+		"first_name":"Jason",
+		"type":"private"
+	},
+	"date":1747307686,
+	"text":"hi"
+}

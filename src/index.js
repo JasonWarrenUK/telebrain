@@ -5,44 +5,48 @@ import dotenv from "dotenv";
 dotenv.config();
 console.log(process.env);
 
-const token = process.env.TELEGRAM_KEY || "";
+const token = process.env.TELEGRAM_KEY;
+if (!token) {
+	throw new Error("TELEGRAM_KEY is not set in the .env file");
+}
 
 const bot = new TelegramBot(token, {polling: true});
 
-bot.onText(/\/echo (.+)/, (msg/* :Message */, match) => {
-	const chatId = msg.chat.id;
-	
-	const resp = match ? match[1] : "NOTHIN'";
+bot.setMyCommands([
+  { command: "start", description: "Starts the bot" },
+	{ command: "code", description: "Show the repo" }
+]);
 
-  bot.sendMessage(chatId, resp);
-});
-
-bot.on('message', (msg/* :Message */) => {
-  const chatId = msg.chat.id;
-
+bot.onText(/\/start/, (msg) => {
 	const user = msg.from.first_name;
-	const text = msg.text;
 
-	const resp = `${user}, you said this: ${text}`
+  bot.sendMessage(msg.chat.id, `Oh fuck. ${user}. It's you.`);
+});
+
+bot.onText(/\/code/, (msg, match) => {
+	const chatId = msg.chat.id;
+	const user = msg.from.first_name;
+	const repo = "https://github.com/JasonWarrenUK/telebrain";
+
+	const resp = `Oh. You want to see me... naked? Well, alright ${user}. Here it is. ${repo}`;
 
   bot.sendMessage(chatId, resp);
 });
 
-/*
-{
-	"message_id":15,
-	"from":{
-		"id":7068960341,
-		"is_bot":false,
-		"first_name":"Jason",
-		"language_code":"en"
-	},
-	"chat":{
-		"id":7068960341,
-		"first_name":"Jason",
-		"type":"private"
-	},
-	"date":1747307686,
-	"text":"hi"
-}
-*/
+bot.on("message", (msg) => {
+  const text = msg.text || "";
+  if (text.startsWith("/")) return;
+
+  const chatId = msg.chat.id;
+  const user = msg.from.first_name;
+  const resp = `${user}, you said this: ${text}`;
+
+  bot.sendMessage(chatId, resp);
+});
+
+process.on("SIGINT", () => {
+  console.log("BORED. Bye.");
+	
+  bot.stopPolling()
+		.then(() => process.exit(0));
+});
